@@ -10,7 +10,7 @@ export default function Footer() {
         <div>
           <p className="font-display text-2xl tracking-wider2">{brand.name}</p>
           <p className="mt-4 max-w-[30ch] text-sm text-ink-soft">
-            Considered silhouettes and premium materials, from an independent
+            Silhouettes and premium materials, from an independent
             studio.
           </p>
           <div className="mt-6 flex gap-4 text-sm">
