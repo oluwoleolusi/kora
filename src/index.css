@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bone-soft text-ink font-body antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display font-normal text-ink;
+  }
+
+  a {
+    @apply text-inherit;
+  }
+
+  ::selection {
+    @apply bg-ink text-bone-soft;
+  }
+
+  :focus-visible {
+    outline: 2px solid #141412;
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .container-editorial {
+    @apply mx-auto w-full max-w-[1360px] px-6 sm:px-8 lg:px-12;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-ink px-7 py-3.5 text-[0.8rem] uppercase tracking-wideish text-bone-soft
+           transition-colors duration-300 ease-atelier hover:bg-charcoal
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 border border-ink px-7 py-3.5 text-[0.8rem] uppercase tracking-wideish text-ink
+           transition-colors duration-300 ease-atelier hover:bg-ink hover:text-bone-soft
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center gap-2 border border-bone-soft/60 px-7 py-3.5 text-[0.8rem] uppercase tracking-wideish text-bone-soft
+           transition-colors duration-300 ease-atelier hover:border-bone-soft hover:bg-bone-soft hover:text-ink;
+  }
+
+  .btn-text {
+    @apply inline-flex items-center gap-2 text-[0.8rem] uppercase tracking-wideish text-ink underline decoration-ink/30 underline-offset-4
+           transition-colors duration-200 hover:decoration-ink;
+  }
+
+  .eyebrow {
+    @apply text-[0.75rem] uppercase tracking-wider2 text-ink-soft;
+  }
+
+  .section-pad {
+    @apply py-20 sm:py-28;
+  }
+
+  .field-input {
+    @apply w-full border border-line bg-transparent px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors focus:border-ink;
+  }
+
+  .field-label {
+    @apply text-[0.75rem] uppercase tracking-wideish text-ink-soft;
+  }
+}
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
