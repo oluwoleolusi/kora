@@ -1,0 +1,57 @@
+name: Update portfolio demo
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Kora
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Kora
+        run: npm run build
+
+      - name: Check out portfolio
+        uses: actions/checkout@v4
+        with:
+          repository: oluwoleolusi/oluwole-portfolio
+          token: ${{ secrets.PORTFOLIO_REPO_TOKEN }}
+          path: portfolio
+
+      - name: Replace Kora demo
+        shell: bash
+        run: |
+          rm -rf portfolio/public/demos/kora
+          mkdir -p portfolio/public/demos/kora
+          cp -R dist/. portfolio/public/demos/kora/
+
+      - name: Commit and push portfolio update
+        working-directory: portfolio
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/demos/kora
+          if git diff --cached --quiet; then
+            echo "No Kora demo changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update Kora demo"
+          git push
